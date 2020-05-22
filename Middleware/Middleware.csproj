@@ -45,7 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Middleware.cs" />
+    <Compile Include="Classes\Lottery\LotteryCommands.cs" />
+    <Compile Include="Classes\Lottery\LotteryData.cs" />
+    <Compile Include="Classes\Lottery\LotteryManager.cs" />
+    <Compile Include="Classes\Player\PlayerExtension.cs" />
+    <Compile Include="Classes\Player\PlayerManagerNetwork.cs" />
+    <Compile Include="MessagesManager.cs" />
+    <Compile Include="Classes\Player\PlayerManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

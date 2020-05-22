@@ -23,7 +23,7 @@ namespace SchedulerNamespace
             _sched = _schedFact.GetScheduler();
             LoadJobs(connectionString);
             _sched.Start();
-            Middleware.DebugMessage("Scheduler started!");
+            MessagesManager.Instance.DebugMessage("Scheduler started!");
         }
 
         private void LoadJobs(string cs)
@@ -37,7 +37,7 @@ namespace SchedulerNamespace
             {
                 Triggers = dbContext.Triggers.ToList();
             }
-            Middleware.DebugMessage("Loading jobs Started!");
+            MessagesManager.Instance.DebugMessage("Loading jobs Started!");
             foreach (var JobType in jobsTypes)
             {
                 var i = 0;
@@ -48,10 +48,10 @@ namespace SchedulerNamespace
                     _sched.ScheduleJob(job, myTrigger);
                     i++;
 
-                    Middleware.DebugMessage($"Loaded {job.Name}");
+                    MessagesManager.Instance.DebugMessage($"Loaded {job.Name}");
                 }
             }
-            Middleware.DebugMessage("Loading jobs Finished!");
+            MessagesManager.Instance.DebugMessage("Loading jobs Finished!");
         }
         private static CronTrigger GetTrigger(string triggerName, string cronExpression)
         {
