@@ -35,9 +35,9 @@ namespace MiddlewareNamespace.Classes.Lottery
         }
         public void ResetPlayers()
         {
-            MessagesManager.Instance.DebugMessage("Reseting players!");
+            MessagesManager.Instance.DebugMessage("Restarting Lottery players!");
 
-            foreach (var v in PlayerManager.Instance.playerExtendedList)
+            foreach (var v in PlayerManager.Instance.playerExtendedList.Where(o => o.Value.Lottery.didGamble != null && o.Value.Lottery.didGamble.Value))
             {
                 MessagesManager.Instance.DebugMessage(v.Key.Name + " " + v.Value.Lottery.ToString());
                 v.Value.Lottery.Reset();

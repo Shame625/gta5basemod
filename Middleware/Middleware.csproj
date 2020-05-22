@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Counter\CounterCommands.cs" />
+    <Compile Include="Classes\Counter\CounterData.cs" />
     <Compile Include="Classes\Lottery\LotteryCommands.cs" />
     <Compile Include="Classes\Lottery\LotteryData.cs" />
     <Compile Include="Classes\Lottery\LotteryManager.cs" />

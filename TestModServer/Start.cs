@@ -1,6 +1,7 @@
 ﻿using CitizenFX.Core;
 using CitizenFX.Core.Native;
 using Database;
+using Middleware.Classes.Counter;
 using Middleware.Classes.Lottery;
 using Middleware.Classes.Player;
 using SchedulerNamespace;
@@ -32,6 +33,7 @@ namespace TestModServer
 
             //Register commands here
             LotteryCommands.RegisterLotteryCommands();
+            CounterCommands.RegisterCounterCommands();
         }
     }
 

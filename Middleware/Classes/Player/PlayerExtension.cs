@@ -1,4 +1,5 @@
-﻿using MiddlewareNamespace.Classes.Lottery;
+﻿using Middleware.Classes.Counter;
+using MiddlewareNamespace.Classes.Lottery;
 
 namespace MiddlewareNamespace.Classes.Player
 {
@@ -12,7 +13,9 @@ namespace MiddlewareNamespace.Classes.Player
         public PlayerExtension()
         {
             Lottery = new LotteryData();
+            Counter = new CounterData { Number = 0 };
         }
         public LotteryData Lottery { get; set; }
+        public CounterData Counter { get; set; }
     }
 }

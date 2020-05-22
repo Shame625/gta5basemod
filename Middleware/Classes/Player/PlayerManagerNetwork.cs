@@ -17,7 +17,7 @@ namespace Middleware.Classes.Player
 
         public void RegisterPlayerManagerNetworkEvents(EventHandlerDictionary ev)
         {
-            ev["PlayerDropped"] += new Action<CitizenFX.Core.Player, string>(OnPlayerDropped);
+            ev["playerDropped"] += new Action<CitizenFX.Core.Player, string>(OnPlayerDropped);
         }
 
         private void OnPlayerDropped([FromSource]CitizenFX.Core.Player player, string reason)
