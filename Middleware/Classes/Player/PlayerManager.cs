@@ -1,13 +1,16 @@
 ﻿using CitizenFX.Core;
 using Middleware.Classes.Player;
+using System;
 using System.Collections.Generic;
 
 namespace MiddlewareNamespace.Classes.Player
 {
-    public sealed class PlayerManager
+    public sealed class PlayerManager : BaseScript
     {
-        public Dictionary<CitizenFX.Core.Player, PlayerExtension> playerExtendedList = new Dictionary<CitizenFX.Core.Player, PlayerExtension>();
+        public Dictionary<int, ExtendendedPlayer> playerExtendedList = new Dictionary<int, ExtendendedPlayer>();
         PlayerList pl = new PlayerList();
+        public string ConnectionString;
+        dynamic ESX;
         private CitizenFX.Core.Player GetPlayer(int index)
         {
             return pl[index];
@@ -15,33 +18,25 @@ namespace MiddlewareNamespace.Classes.Player
 
         public ExtendendedPlayer GetExtendedPlayer(int source)
         {
-            var player = GetPlayer(source);
+            if(!playerExtendedList.ContainsKey(source))
+            {
+                var player = GetPlayer(source);
+                var xPlayerIdentifier = ESX.GetPlayerFromId(source).getIdentifier();
+                playerExtendedList.Add(source, new ExtendendedPlayer(player, xPlayerIdentifier));
 
-            if (playerExtendedList.ContainsKey(player))
-            {
-                var current = playerExtendedList[player];
-                if (current != null)
-                {
-                    return new ExtendendedPlayer { Player = player, Extensions = current };
-                }
-                else
-                {
-                    playerExtendedList[player] = new PlayerExtension();
-                    return new ExtendendedPlayer { Player = player, Extensions = playerExtendedList[player] };
-                }
+                return playerExtendedList[source];
             }
-            else
-            {
-                playerExtendedList.Add(player, new PlayerExtension());
-                return new ExtendendedPlayer { Player = player, Extensions = playerExtendedList[player] };
-            }
+
+            return playerExtendedList[source];
         }
 
         public bool DestroyExtendedPlayer(CitizenFX.Core.Player player)
         {
-            if (playerExtendedList.ContainsKey(player))
+            if (playerExtendedList.ContainsKey(int.Parse(player.Handle)))
             {
-                playerExtendedList.Remove(player);
+                playerExtendedList[int.Parse(player.Handle)].Save();
+                playerExtendedList.Remove(int.Parse(player.Handle));
+
                 return true;
             }
             return false;
@@ -52,6 +47,24 @@ namespace MiddlewareNamespace.Classes.Player
 
         private PlayerManager()
         {
+        }
+        public void Init(string cs, dynamic esx, EventHandlerDictionary ev)
+        {
+            ConnectionString = cs;
+            ESX = esx;
+            ev["onResourceStop"] += new Action<string>(OnResourceStop);
+        }
+        private void OnResourceStop(string resourceName)
+        {
+            MessagesManager.Instance.DebugMessage(resourceName);
+            if ("TestMod" != resourceName) return;
+
+            MessagesManager.Instance.DebugMessage("Saving all players!");
+            foreach (var v in playerExtendedList)
+            {
+                v.Value.Save();
+            }
+            MessagesManager.Instance.DebugMessage("Saving dong!");
         }
         public static PlayerManager Instance { get; } = new PlayerManager();
     }

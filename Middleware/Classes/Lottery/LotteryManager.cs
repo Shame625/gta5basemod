@@ -37,16 +37,16 @@ namespace MiddlewareNamespace.Classes.Lottery
         {
             MessagesManager.Instance.DebugMessage("Restarting Lottery players!");
 
-            foreach (var v in PlayerManager.Instance.playerExtendedList.Where(o => o.Value.Lottery.didGamble != null && o.Value.Lottery.didGamble.Value))
+            foreach (var v in PlayerManager.Instance.playerExtendedList.Where(o => o.Value.Extensions.Lottery.didGamble != null && o.Value.Extensions.Lottery.didGamble.Value))
             {
-                MessagesManager.Instance.DebugMessage(v.Key.Name + " " + v.Value.Lottery.ToString());
-                v.Value.Lottery.Reset();
+                MessagesManager.Instance.DebugMessage(v.Value.Player.Name + " " + v.Value.Extensions.Lottery.ToString());
+                v.Value.Extensions.Lottery.Reset();
             }
         }
         private List<CitizenFX.Core.Player> GetWinners()
         {
-            return PlayerManager.Instance.playerExtendedList.Where(o => o.Value.Lottery.guessNumber == guessNumber)
-                .Select(o => o.Key)
+            return PlayerManager.Instance.playerExtendedList.Where(o => o.Value.Extensions.Lottery.guessNumber == guessNumber)
+                .Select(o => o.Value.Player)
                 .ToList();
         }
 

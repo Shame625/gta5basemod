@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="Entity\Session.cs" />
     <Compile Include="Entity\TestEntity.cs" />
     <Compile Include="Entity\Trigger.cs" />
     <Compile Include="Migrations\202005200928330_first.cs" />
@@ -84,6 +85,10 @@
     <Compile Include="Migrations\202005211024576_Triggers.cs" />
     <Compile Include="Migrations\202005211024576_Triggers.designer.cs">
       <DependentUpon>202005211024576_Triggers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005230902455_UserSession.cs" />
+    <Compile Include="Migrations\202005230902455_UserSession.designer.cs">
+      <DependentUpon>202005230902455_UserSession.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005211024576_Triggers.resx">
       <DependentUpon>202005211024576_Triggers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005230902455_UserSession.resx">
+      <DependentUpon>202005230902455_UserSession.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,6 +10,7 @@ namespace Database
     {
         public DbSet<TestEntity> TestTable { get; set; }
         public DbSet<Trigger> Triggers { get; set; }
+        public DbSet<Session> UserSession { get; set; }
         public class ApplicationDbContextFactory : IDbContextFactory<ApplicationDbContext>
         {
             public ApplicationDbContext Create()
