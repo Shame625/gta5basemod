@@ -11,6 +11,9 @@
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            //Uncoment for MYSQL and set AutomaticMigrationsEnabled to TRUE
+            //AutomaticMigrationDataLossAllowed = true;
+            //SetSqlGenerator("MySql.Data.MySqlClient", new MySql.Data.Entity.MySqlMigrationSqlGenerator());
         }
 
         protected override void Seed(ApplicationDbContext context)
